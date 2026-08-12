@@ -1,3 +1,4 @@
+
 WORK_TABS = ['https://open.spotify.com/', 
             'https://outlook.cloud.microsoft/mail/inbox/',
             'https://kpmgche.sharepoint.com/sites/CH-SwissReGlobalTeam/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FCH%2DSwissReGlobalTeam%2FShared%20Documents%2F302%5FSPEC%5FIRM&viewid=adc3e882%2De1e2%2D4fca%2D879b%2D2e22fa3a48b4&ovuser=deff24bb%2D2089%2D4400%2D8c8e%2Df71e680378b2%2Cnicolaskeller%40kpmg%2Ecom&OR=Teams%2DHL&CT=1762499864188&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNTEwMTYxNjUwOSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D',

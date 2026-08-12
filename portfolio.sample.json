@@ -1,0 +1,16 @@
+{
+  "holdings": [
+    {
+      "ticker": "AAPL",
+      "shares": 2,
+      "avg_cost": 180.00,
+      "currency": "USD"
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 1,
+      "avg_cost": 400.00,
+      "currency": "USD"
+    }
+  ]
+}

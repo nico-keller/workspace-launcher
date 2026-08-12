@@ -1,14 +1,18 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# VS Code
+# VS Code local settings
 .vscode/
 
-# Environment variables
+# Personal / sensitive local data
+portfolio.local.json
 .env
+config.py
 
-# Build files
+# Build output
 dist/
 build/
 
@@ -16,5 +20,3 @@ build/
 .DS_Store
 Thumbs.db
 
-
-.config.py
