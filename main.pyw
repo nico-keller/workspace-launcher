@@ -13,7 +13,7 @@ TASKS = [
         weather_location=WEATHER_LOCATION,
         weather_lat=WEATHER_LATITUDE,
         weather_lon=WEATHER_LONGITUDE,
-    ),
+    )
     # Swap in for the full per-position table instead of the summary:
     #OpenPortfolioDashboardTask()
 ]
