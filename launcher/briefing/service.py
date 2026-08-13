@@ -27,13 +27,15 @@ class BriefingService:
 
     def build(self) -> BriefingData:
         with ThreadPoolExecutor(max_workers=3) as executor:
-            portfolio_future = executor.submit(self._safe_call, self._portfolio_provider.get_summary)
+            portfolio_future = executor.submit(
+                self._safe_call, self._portfolio_provider.get_positions, default=[]
+            )
             weather_future = executor.submit(self._safe_call, self._weather_provider.get_snapshot)
             events_future = executor.submit(self._safe_call, self._calendar_provider.get_todays_events, default=[])
 
         return BriefingData(
             greeting_name=self._greeting_name,
-            portfolio=portfolio_future.result(),
+            positions=tuple(portfolio_future.result()),
             weather=weather_future.result(),
             events=tuple(events_future.result()),
         )

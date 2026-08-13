@@ -3,13 +3,13 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from launcher.portfolio.data import PortfolioSummary
+from launcher.portfolio.data import PortfolioPosition
 
 from .models import CalendarEvent, WeatherSnapshot
 
 
 class PortfolioProvider(Protocol):
-    def get_summary(self) -> PortfolioSummary: ...
+    def get_positions(self) -> list[PortfolioPosition]: ...
 
 
 class WeatherProvider(Protocol):

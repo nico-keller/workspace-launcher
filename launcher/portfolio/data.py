@@ -1,8 +1,8 @@
 """Portfolio data: loading holdings, fetching live prices, aggregating totals.
 
 Pure data — no console/display coupling — so both the CLI view
-(launcher/portfolio/view.py) and the briefing provider
-(launcher/providers/portfolio_yfinance.py) can reuse it independently.
+(launcher/portfolio/view.py) and the briefing renderer
+(launcher/briefing/renderer.py) can reuse it independently.
 """
 from __future__ import annotations
 
@@ -61,10 +61,14 @@ class PortfolioPosition:
 
 
 @dataclass(frozen=True, slots=True)
-class PortfolioSummary:
-    total_value: float
-    currency: str
-    change_pct_today: float
+class CurrencyTotals:
+    market_value: float
+    cost_basis: float
+    gain_loss: float
+
+    @property
+    def gain_loss_pct(self) -> float:
+        return self.gain_loss / self.cost_basis * 100 if self.cost_basis else 0.0
 
 
 def load_holdings() -> list[Holding]:
@@ -122,29 +126,18 @@ def fetch_positions(holdings: list[Holding]) -> list[PortfolioPosition]:
     return positions
 
 
-def _fx_rate(from_currency: str, to_currency: str) -> float:
-    if from_currency == to_currency:
-        return 1.0
-    pair = yf.Ticker(f"{from_currency}{to_currency}=X")
-    history = pair.history(period="1d")
-    if history.empty:
-        raise ValueError(f"No FX rate available for {from_currency}->{to_currency}")
-    return float(history["Close"].iloc[-1])
+def totals_by_currency(positions: list[PortfolioPosition]) -> dict[str, CurrencyTotals]:
+    """Aggregate positions per their native currency — no FX conversion.
 
-
-def summarize(positions: list[PortfolioPosition], target_currency: str = "CHF") -> PortfolioSummary:
-    """Aggregate possibly-mixed-currency positions into one total via live FX rates."""
-    total_today = 0.0
-    total_yesterday = 0.0
-    fx_cache: dict[str, float] = {}
-
+    Shared by the CLI table and the briefing HTML table so the two views
+    can't drift apart on how they sum things up.
+    """
+    totals: dict[str, CurrencyTotals] = {}
     for position in positions:
-        if position.currency not in fx_cache:
-            fx_cache[position.currency] = _fx_rate(position.currency, target_currency)
-        rate = fx_cache[position.currency]
-
-        total_today += position.market_value * rate
-        total_yesterday += position.shares * position.previous_close * rate
-
-    change_pct = ((total_today - total_yesterday) / total_yesterday * 100) if total_yesterday else 0.0
-    return PortfolioSummary(total_value=total_today, currency=target_currency, change_pct_today=change_pct)
+        running = totals.get(position.currency, CurrencyTotals(0.0, 0.0, 0.0))
+        totals[position.currency] = CurrencyTotals(
+            market_value=running.market_value + position.market_value,
+            cost_basis=running.cost_basis + position.cost_basis,
+            gain_loss=running.gain_loss + position.unrealized_gain_loss,
+        )
+    return totals

@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import time
 
-from launcher.portfolio.data import PortfolioSummary
+from launcher.portfolio.data import PortfolioPosition
 
 
 @dataclass(frozen=True, slots=True)
@@ -22,6 +22,6 @@ class CalendarEvent:
 @dataclass(frozen=True, slots=True)
 class BriefingData:
     greeting_name: str
-    portfolio: PortfolioSummary | None
+    positions: tuple[PortfolioPosition, ...]
     weather: WeatherSnapshot | None
     events: tuple[CalendarEvent, ...] = field(default_factory=tuple)

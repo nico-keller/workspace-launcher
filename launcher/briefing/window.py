@@ -38,7 +38,7 @@ class _WindowApi:
             self._window.destroy()
 
 
-def show(build_html: Callable[[], str], width: int = 360, height: int = 420) -> None:
+def show(build_html: Callable[[], str], width: int = 480, height: int = 640) -> None:
     api = _WindowApi()
     window = webview.create_window(
         title="Morning Briefing",

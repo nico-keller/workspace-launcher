@@ -5,7 +5,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from .data import PortfolioPosition
+from .data import PortfolioPosition, totals_by_currency
 
 
 def format_money(value: float, currency: str) -> str:
@@ -37,17 +37,8 @@ def display_portfolio(positions: list[PortfolioPosition]) -> None:
     table.add_column("Gain/Loss", justify="right")
     table.add_column("Gain/Loss %", justify="right")
 
-    totals_by_currency: dict[str, dict[str, float]] = {}
-
     for position in positions:
         currency = position.currency
-        totals_by_currency.setdefault(
-            currency, {"market_value": 0.0, "cost_basis": 0.0, "gain_loss": 0.0}
-        )
-        totals_by_currency[currency]["market_value"] += position.market_value
-        totals_by_currency[currency]["cost_basis"] += position.cost_basis
-        totals_by_currency[currency]["gain_loss"] += position.unrealized_gain_loss
-
         table.add_row(
             position.ticker,
             f"{position.shares:,.4f}",
@@ -62,13 +53,11 @@ def display_portfolio(positions: list[PortfolioPosition]) -> None:
     console.print()
     console.print(table)
 
-    summary_lines = []
-    for currency, totals in totals_by_currency.items():
-        total_gain_pct = totals["gain_loss"] / totals["cost_basis"] * 100 if totals["cost_basis"] else 0
-        summary_lines.append(
-            f"{currency}: Value {totals['market_value']:,.2f} | "
-            f"Gain/Loss {totals['gain_loss']:+,.2f} | {total_gain_pct:+.2f}%"
-        )
+    summary_lines = [
+        f"{currency}: Value {totals.market_value:,.2f} | "
+        f"Gain/Loss {totals.gain_loss:+,.2f} | {totals.gain_loss_pct:+.2f}%"
+        for currency, totals in totals_by_currency(positions).items()
+    ]
 
     console.print()
     console.print(Panel("\n".join(summary_lines), title="Portfolio Summary", border_style="blue"))
