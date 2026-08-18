@@ -1,6 +1,7 @@
 from config import GREETING_NAME, TEAMS_URL, WEATHER_LATITUDE, WEATHER_LOCATION, WEATHER_LONGITUDE, WORK_TABS
 from launcher.tasks import MorningBriefingTask, OpenTabsTask, OpenTeamsTask
 
+# Contains the list of tasks to be executed
 TASKS = [
     OpenTeamsTask(TEAMS_URL),
     OpenTabsTask(WORK_TABS),
@@ -12,7 +13,7 @@ TASKS = [
     ),
 ]
 
-
+# Runs each task sequentially
 def main() -> None:
     for task in TASKS:
         task.run()
