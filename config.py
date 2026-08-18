@@ -15,13 +15,12 @@ WORK_TABS = [
     'https://open.spotify.com/',
     'https://outlook.cloud.microsoft/mail/inbox/',
     'https://kpmgche.sharepoint.com/sites/CH-SwissReGlobalTeam/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FCH%2DSwissReGlobalTeam%2FShared%20Documents%2F302%5FSPEC%5FIRM&viewid=adc3e882%2De1e2%2D4fca%2D879b%2D2e22fa3a48b4&ovuser=deff24bb%2D2089%2D4400%2D8c8e%2Df71e680378b2%2Cnicolaskeller%40kpmg%2Ecom&OR=Teams%2DHL&CT=1762499864188&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNTEwMTYxNjUwOSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D',
-    'https://kpmgche.sharepoint.com/:x:/r/sites/CH-SwissReGlobalTeam/_layouts/15/Doc.aspx?sourcedoc=%7B2CC069DA-A079-4BEE-B5F1-F4EA6070DAFF%7D&file=OnePlatform%20Type%202%20Tracker%202026.xlsx&action=default&mobileredirect=true',
     'https://kpmgche.sharepoint.com/:x:/r/sites/CH-SwissReGlobalTeam/_layouts/15/Doc.aspx?sourcedoc=%7B13180C49-805C-4C5E-8550-318E7EA81200%7D&file=Kate%20Squad%20Status%20Tracker.xlsx&action=default&mobileredirect=true',
     'https://kpmgche.sharepoint.com/:x:/r/sites/CH-SwissReGlobalTeam/_layouts/15/Doc.aspx?sourcedoc=%7B6FDB0237-0F7A-4FC9-BE64-6B36F08E2577%7D&file=Multitenancy%20Status%20Tracker%202026.xlsx&action=default&mobileredirect=true',
     'https://kpmgche-my.sharepoint.com/:x:/r/personal/nicolaskeller_kpmg_com/_layouts/15/Doc.aspx?sourcedoc=%7B4C51C971-CC68-470C-B8C5-D44AAF67FE73%7D&file=Time%20Control%20-%20Nico.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1&wdOrigin=SHAREPOINT.SHELL%2CAPPHOME-WEB.FILEBROWSER.RECENT&wdPreviousSession=054cf291-2676-4649-93d5-1bc68bb8bbb6&wdPreviousSessionSrc=AppHomeWeb&ct=1763114935409',
 ]
 
-GREETING_NAME = "Nicolas"
+GREETING_NAME = "Nico"
 WEATHER_LOCATION = "Zurich"
 WEATHER_LATITUDE = 47.3769
 WEATHER_LONGITUDE = 8.5417
